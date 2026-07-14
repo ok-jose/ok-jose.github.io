@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="zh-CN"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="9 年后，用 Astro 重建这个博客。"><meta name="generator" content="Astro v5.18.2"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="canonical" href="https://ok-jose.github.io/blog/welcome-back/"><link rel="alternate" type="application/rss+xml" title="Jose's Blog" href="https://ok-jose.github.io/rss.xml"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:title" content="Hello Again —— 博客重建记 · Jose's Blog"><meta property="og:description" content="9 年后，用 Astro 重建这个博客。"><meta property="og:image" content="https://ok-jose.github.io/favicon.svg"><title>Hello Again —— 博客重建记 · Jose&#39;s Blog</title><link rel="stylesheet" href="/_astro/_slug_.BZDALtnK.css"></head> <body> <header class="site-header"> <div class="site-header__inner"> <a class="site-header__brand" href="/">Jose&#39;s Blog</a> <nav class="site-nav" aria-label="主导航"> <a href="/">首页</a> <a href="/blog" class="is-active">博客</a> <a href="/tags">标签</a> <a href="/about">关于</a> </nav> </div> </header> <main>  <article class="prose-container"> <header class="article-header"> <h1>Hello Again —— 博客重建记</h1> <div class="article-meta"> <time datetime="2026-07-14T00:00:00.000Z"> <time datetime="2026-07-14T00:00:00.000Z">2026年7月14日</time> </time> <span>·</span> <span>约 1 分钟阅读</span>  </div> <div class="article-tags"> <a class="tag" href="/tags/meta/">
+#meta </a><a class="tag" href="/tags/astro/">
+#astro </a> </div> </header> <div class="prose">  <p>这是一篇重启博客的宣言。</p>
+<h2 id="为什么重启">为什么重启</h2>
+<p>上次更新是 2017 年 6 月 26 日。9 年过去，Hexo 还在，
+Next 主题却早已不再维护，部署流程也早已忘记。</p>
+<h2 id="为什么选-astro">为什么选 Astro</h2>
+<ul>
+<li><strong>内容优先</strong>：默认零 JS，文章页就是纯 HTML。</li>
+<li><strong>现代 DX</strong>：TypeScript、Content Collections、Vite 一切都是现成的。</li>
+<li><strong>部署简单</strong>：<code>astro build</code> 完事，丢给 GitHub Actions 自动发布。</li>
+</ul>
+<h2 id="接下来">接下来</h2>
+<ul>
+<li>把 2017 年的旧文迁移过来</li>
+<li>重新写点东西</li>
+<li>找个干净的主题配色</li>
+</ul>
+<blockquote>
+<p>Done is better than perfect.</p>
+</blockquote>
+<pre class="astro-code github-dark-dimmed" style="background-color:#22272e;color:#adbac7; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#768390">// 顺便贴个 Astro 5 渲染文章的小细节</span></span>
+<span class="line"><span style="color:#F47067">import</span><span style="color:#ADBAC7"> { render } </span><span style="color:#F47067">from</span><span style="color:#96D0FF"> 'astro:content'</span><span style="color:#ADBAC7">;</span></span>
+<span class="line"><span style="color:#F47067">const</span><span style="color:#ADBAC7"> { </span><span style="color:#6CB6FF">Content</span><span style="color:#ADBAC7"> } </span><span style="color:#F47067">=</span><span style="color:#F47067"> await</span><span style="color:#DCBDFB"> render</span><span style="color:#ADBAC7">(entry);</span></span></code></pre>
+<p>欢迎订阅 <a href="/rss.xml">RSS</a> 或在 <a href="/about">关于页</a> 找到更多联系方式。</p>  </div> </article> <div class="prose-container"> <a class="back-link" href="/blog">← 回到博客列表</a> </div>  </main> <footer class="site-footer"> <div class="container">
+© 2026 Jose&#39;s Blog ·
+<a href="/rss.xml">RSS</a> ·
+        Powered by <a href="https://astro.build">Astro</a> </div> </footer> </body></html>
