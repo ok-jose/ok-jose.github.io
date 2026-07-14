@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
+);
+
+const groupedByYear = posts.reduce(
+  (acc, post) => {
+    const year = post.data.pubDate.getFullYear();
+    (acc[year] ??= []).push(post);
+    return acc;
+  },
+  {} as Record<number, typeof posts>,
+);
+
+const years = Object.keys(groupedByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+---
+
+<BaseLayout title="博客" description="所有文章归档">
+  <section class="container">
+    <header class="hero" style="padding-top: 2.5rem; padding-bottom: 1rem;">
+      <h1 class="hero__title">博客</h1>
+      <p class="hero__tagline">共 {posts.length} 篇文章。</p>
+    </header>
+
+    {
+      years.length === 0 ? (
+        <p class="empty-state">还没写文章。</p>
+      ) : (
+        years.map((year) => (
+          <section>
+            <h2 class="section-title">{year}</h2>
+            <ul class="post-list">
+              {groupedByYear[year].map((post) => (
+                <li class="post-card">
+                  <h3 class="post-card__title">
+                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                  </h3>
+                  <div class="post-card__meta">
+                    <FormattedDate date={post.data.pubDate} />
+                    {post.data.tags.slice(0, 3).map((t) => (
+                      <a class="tag" href={`/tags/${t}/`}>
+                        #{t}
+                      </a>
+                    ))}
+                  </div>
+                  {post.data.description && (
+                    <p class="post-card__desc">{post.data.description}</p>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      )
+    }
+  </section>
+</BaseLayout>

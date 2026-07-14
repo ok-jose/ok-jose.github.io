@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Avatar from '../components/Avatar.astro';
+import StatusBar from '../components/StatusBar.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { getCollection } from 'astro:content';
+import { SITE_TITLE, SITE_DESCRIPTION, CURRENT_STATUS, SOCIAL_LINKS } from '../consts';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5);
+---
+
+<BaseLayout title={undefined} description={SITE_DESCRIPTION}>
+  <section class="container">
+    <div class="hero-card">
+      <div class="hero-card__content">
+        <h1 class="hero-card__greeting">
+          Hi, 我是 <span class="hero-card__name">Jose</span>
+          <span class="hero-card__wave" aria-hidden="true">👋</span>
+        </h1>
+        <p class="hero-card__bio">{SITE_DESCRIPTION}</p>
+
+        <div class="hero-card__status">
+          <StatusBar
+            emoji={CURRENT_STATUS.emoji}
+            label={CURRENT_STATUS.label}
+            text={CURRENT_STATUS.text}
+            href={CURRENT_STATUS.href}
+          />
+        </div>
+
+        <div class="hero-card__socials">
+          <SocialLinks links={SOCIAL_LINKS} />
+        </div>
+      </div>
+
+      <div class="hero-card__avatar">
+        <Avatar initials="J" size={180} />
+      </div>
+    </div>
+
+    <h2 class="section-title">最近更新</h2>
+    {
+      posts.length === 0 ? (
+        <p class="empty-state">还没写文章，先去 <a href="/blog">博客</a> 看看？</p>
+      ) : (
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li class="post-card">
+              <h3 class="post-card__title">
+                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              </h3>
+              <div class="post-card__meta">
+                <FormattedDate date={post.data.pubDate} />
+                {post.data.tags.slice(0, 3).map((t) => (
+                  <a class="tag" href={`/tags/${t}/`}>
+                    #{t}
+                  </a>
+                ))}
+              </div>
+              {post.data.description && (
+                <p class="post-card__desc">{post.data.description}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</BaseLayout>

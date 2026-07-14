@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_AUTHOR } from '../consts';
+---
+
+<BaseLayout title="关于" description={`关于 ${SITE_AUTHOR}`}>
+  <section class="prose-container">
+    <header class="hero" style="padding-top: 2.5rem; padding-bottom: 1rem;">
+      <h1 class="hero__title">关于我</h1>
+    </header>
+
+    <article class="prose">
+      <p>
+        你好，我是 <strong>{SITE_AUTHOR}</strong>。
+        这个博客从 2017 年写到 2017 年，中间停了 9 年。2026 年用 Astro
+        重建。
+      </p>
+
+      <h2>这里会写什么</h2>
+      <ul>
+        <li>折腾的过程：搭博客、玩新框架、写工具</li>
+        <li>读到的有趣东西</li>
+        <li>生活里偶尔值得记一下的小事</li>
+      </ul>
+
+      <h2>技术栈</h2>
+      <ul>
+        <li>静态站点：<a href="https://astro.build">Astro 5</a></li>
+        <li>写作：Markdown / MDX（Content Collections）</li>
+        <li>部署：GitHub Pages via GitHub Actions</li>
+        <li>源文件：<a href="https://github.com/ok-jose/jose.github.io">ok-jose/jose.github.io</a></li>
+      </ul>
+
+      <h2>订阅</h2>
+      <p>
+        欢迎通过 <a href="/rss.xml">RSS</a> 订阅更新。
+      </p>
+    </article>
+  </section>
+</BaseLayout>
