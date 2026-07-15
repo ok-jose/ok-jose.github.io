@@ -6,10 +6,10 @@ export const SITE_URL = 'https://ok-jose.github.io';
 
 // "现在在做什么" 状态条
 export const CURRENT_STATUS = {
-  emoji: '🔨',
-  label: '现在在写',
-  text: 'Astro 博客搭建教程',
-  href: '/blog',
+  emoji: '☕',
+  label: '现在',
+  text: '休整中，看新机会',
+  href: '/work',
 };
 
 // 社交链接

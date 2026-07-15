@@ -2,7 +2,7 @@
  * 工作经历数据
  *
  * 改这里就能更新 /work 页面。
- * 
+ *
  * 字段说明：
  *   - id:           唯一标识（用于锚点）
  *   - company:      公司名
@@ -15,6 +15,8 @@
  *   - highlights:   关键成就（可选，bullet list）
  *   - link:         公司/项目链接（可选）
  *   - logo:         公司 logo 路径（可选，相对于 /public）
+ *
+ * 注意：不要把手机号、邮箱等敏感信息放这里（这是公开页面）。
  */
 
 export type WorkEntry = {
@@ -32,50 +34,81 @@ export type WorkEntry = {
 };
 
 export const workExperience: WorkEntry[] = [
+  // ===== 杭州端点 4 个独立项目 =====
   {
-    id: 'current-role',
-    company: '当前公司（示例）',
-    role: '高级前端工程师',
-    startDate: '2023-01',
-    endDate: null,
-    location: '上海',
-    description: '负责核心业务线的前端架构设计与核心功能开发，参与跨团队协作推动工程化建设。',
-    tech: ['React', 'TypeScript', 'Node.js', 'Astro', 'Vite'],
-    highlights: [
-      '主导 XX 系统从 0 到 1 搭建，支撑日活 10w+',
-      '将首屏 LCP 从 4s 优化到 1.2s',
-      '推进团队从 JS 迁移到 TS，覆盖率 90%+',
-    ],
-  },
-  {
-    id: 'prev-role',
-    company: '上一家公司（示例）',
-    role: '前端工程师',
-    startDate: '2020-06',
-    endDate: '2022-12',
+    id: 'duandian-agent',
+    company: '杭州端点网络科技有限公司',
+    role: '高级前端开发工程师',
+    startDate: '2025-10',
+    endDate: '2026-04',
     location: '杭州',
-    description: '做 B 端 SaaS 产品，参与中后台框架设计与组件库建设。',
-    tech: ['Vue', 'Webpack', 'Node.js', 'MongoDB'],
+    description:
+      '可视化 AI Agent 编排平台（AI 管理驾驶舱），与 Trantor 2.0 并行推进。',
+    tech: ['React Flow', 'SSE', 'DSL 引擎', 'AI Ops'],
     highlights: [
-      '封装 30+ 通用业务组件，被 5 个业务线复用',
-      '搭建 CI/CD 流程，发布效率提升 3 倍',
+      '基于 React Flow 实现多 Agent 流程拖拽编排',
+      '设计 DSL 双向转换引擎，支持 50+ 字段 Agent 配置面板与 SSE 流式对话',
+      '串联 4 种后端资源类型，自动处理跨资源数据同步与技能合并',
+      '实现 AI Ops 可观测性模块，支持实时监控与异常告警',
     ],
   },
   {
-    id: 'first-role',
-    company: '第一家公司（示例）',
-    role: '初级前端工程师',
-    startDate: '2018-07',
-    endDate: '2020-05',
-    location: '北京',
-    description: '做 H5 营销活动页和小程序，从切图仔开始入门。',
-    tech: ['JavaScript', 'Vue', '小程序'],
+    id: 'duandian-trantor-2',
+    company: '杭州端点网络科技有限公司',
+    role: '高级前端开发工程师',
+    startDate: '2024-01',
+    endDate: '2026-04',
+    location: '杭州',
+    description:
+      'Trantor 2.0 Console 企业级软件构建平台前端架构设计与核心功能开发。',
+    tech: ['React', 'TypeScript', 'TanStack Query', 'React Flow', 'CodeMirror 6', 'Vite'],
+    highlights: [
+      '开发企业级可视化服务编排引擎，支持 40+ 节点类型（流程控制/数据操作/AI/LLM/脚本/HTTP/审批/通知）',
+      '基于 React Flow 自定义有向流程图渲染，支持普通/分支/独占/并行/Switch/Loop 等结构',
+      '集成 CodeMirror 6 脚本编辑器与 AI 辅助流程生成',
+      '实现可视化调试面板，显著降低配置门槛',
+    ],
+  },
+  {
+    id: 'duandian-trantor-1',
+    company: '杭州端点网络科技有限公司',
+    role: '前端工程师 → 高级前端工程师',
+    startDate: '2018-06',
+    endDate: '2023-12',
+    location: '杭州',
+    description:
+      'Trantor 1.0 企业低代码平台前端研发，主导核心运行时引擎与组件库建设。',
+    tech: ['React', 'TypeScript', 'MobX', 'Lerna', 'Monorepo'],
+    highlights: [
+      'Lerna Monorepo 管理 14 个子包、3500+ TypeScript 文件，制定多包协作规范',
+      '设计 nusi-engine 低代码运行时引擎，AST 解析 XML 配置驱动页面渲染与动作执行',
+      '构建基于 MobX 的响应式状态管理体系（shell / sider / route 等全局 store）',
+      '开发 21+ 可复用数据容器组件（Table / Form / Tree / Detail 等），支持字段配置/校验/国际化',
+      '实现动态路由系统与多标签页 keep-alive 缓存，支撑企业多应用导航场景',
+    ],
+  },
+  {
+    id: 'duandian-lazada',
+    company: '杭州端点网络科技有限公司',
+    role: '前端开发工程师',
+    startDate: '2017-10',
+    endDate: '2018-04',
+    location: '杭州',
+    description:
+      '阿里主导的 Lazada 全平台重构项目（Voyager），东南亚电商。',
+    tech: ['React', 'Weex', '灰度切流'],
+    highlights: [
+      '覆盖客户端 / 搜索 / 中台端到端全链路，协同超 300 名技术人员，负责 PC 端商品详情页核心模块',
+      'Weex 完成移动端充值页跨端开发，一套代码覆盖 iOS / Android',
+      '参与新加坡 / 泰国 / 马来西亚等 6 国灰度割接，每次含 100+ 步骤 / 200+ 张表数据迁移',
+      '上线后当年 Birthday 大促 DAU 与 GMV 双双实现 200% 增长',
+    ],
   },
 ];
 
 /**
  * 格式化日期范围
- *   2023-01 ~ null      -> "2023 - 至今"
+ *   2023-01 ~ null      -> "2023.01 - 至今"
  *   2020-06 ~ 2022-12   -> "2020.06 - 2022.12"
  */
 export function formatDateRange(start: string, end: string | null): string {

@@ -16,7 +16,7 @@ const totalYears = sorted.reduce((sum, w) => {
 }, 0) / 12;
 const totalYearsText = totalYears >= 1 ? `${Math.floor(totalYears)} 年多` : `${Math.round(totalYears * 12)} 个月`;
 
-const currentRole = sorted.find((w) => w.endDate === null);
+
 ---
 
 <BaseLayout title="工作" description="我的工作经历">
@@ -24,14 +24,13 @@ const currentRole = sorted.find((w) => w.endDate === null);
     <header class="page-header">
       <h1 class="page-header__title">工作经历</h1>
       <p class="page-header__sub">
-        {sorted.length} 段工作经历 · 累计 {totalYearsText}
-        {currentRole && (
-          <>
-            {' · 现在在 '}
-            <strong>{currentRole.company}</strong> 做 {currentRole.role}
-          </>
-        )}
+        {sorted.length} 段工作经历 · 累计 {totalYearsText} · 最后在杭州端点（2017 — 2026.04）
       </p>
+      <div class="status-banner">
+        <span class="status-banner__dot" aria-hidden="true"></span>
+        <strong>现在找工作中</strong> · 高级前端工程师 · 看新的机会
+        <a href="mailto:lg282923166@gmail.com" class="status-banner__cta">联系我 →</a>
+      </div>
     </header>
 
     <ol class="timeline" role="list">
@@ -272,5 +271,35 @@ const currentRole = sorted.find((w) => w.endDate === null);
     .timeline__entry { padding-left: 1.75rem; }
     .timeline__dot { width: 12px; height: 12px; }
     .timeline__card { padding: 1rem 1.1rem; }
+  }
+
+  /* Status banner */
+  .status-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    padding: 0.6rem 1rem;
+    margin-top: 0.5rem;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: var(--color-fg);
+  }
+  .status-banner__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  .status-banner__cta {
+    color: var(--color-accent);
+    font-weight: 500;
+    margin-left: auto;
+  }
+  .status-banner__cta:hover {
+    text-decoration: none;
   }
 </style>

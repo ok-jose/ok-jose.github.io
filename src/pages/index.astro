@@ -45,20 +45,14 @@ const currentRole = workExperience.find((w) => w.endDate === null);
       </div>
     </div>
 
-    {
-      currentRole && (
-        <a class="current-role-card" href="/work">
-          <div class="current-role-card__label">现在</div>
-          <div class="current-role-card__content">
-            <strong>{currentRole.role}</strong> @ {currentRole.company}
-            <span class="current-role-card__since">
-              自 {currentRole.startDate}
-            </span>
-          </div>
-          <div class="current-role-card__arrow" aria-hidden="true">→</div>
-        </a>
-      )
-    }
+    <a class="current-role-card current-role-card--looking" href="mailto:lg282923166@gmail.com">
+      <div class="current-role-card__label">找工作中</div>
+      <div class="current-role-card__content">
+        <strong>高级前端工程师</strong> · 9 年企业级前端经验
+        <span class="current-role-card__since">最近：杭州端点（2017 – 2026.04）</span>
+      </div>
+      <div class="current-role-card__arrow" aria-hidden="true">📧</div>
+    </a>
 
     <div class="home-grid">
       {
