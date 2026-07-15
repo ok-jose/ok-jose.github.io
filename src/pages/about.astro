@@ -1,19 +1,28 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE_AUTHOR } from '../consts';
+import Avatar from '../components/Avatar.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+import { SITE_AUTHOR, SOCIAL_LINKS } from '../consts';
 ---
 
 <BaseLayout title="关于" description={`关于 ${SITE_AUTHOR}`}>
   <section class="prose-container">
-    <header class="hero" style="padding-top: 2.5rem; padding-bottom: 1rem;">
-      <h1 class="hero__title">关于我</h1>
+    <header style="text-align: center; padding: 3rem 0 2rem;">
+      <div style="display: inline-block; position: relative;">
+        <Avatar size={140} />
+      </div>
+      <h1 style="margin: 1.25rem 0 0.25rem; font-size: 1.8rem; letter-spacing: -0.02em;">
+        {SITE_AUTHOR}
+      </h1>
+      <p style="color: var(--color-fg-muted); margin: 0; font-size: 0.95rem;">
+        写代码、读书、折腾各种东西
+      </p>
     </header>
 
     <article class="prose">
       <p>
-        你好，我是 <strong>{SITE_AUTHOR}</strong>。
-        这个博客从 2017 年写到 2017 年，中间停了 9 年。2026 年用 Astro
-        重建。
+        你好，欢迎来到我的小角落。这个博客从 2017 年写到 2017 年，中间停了 9 年。
+        2026 年用 Astro 重建，<a href="/blog">文章归档</a> 里有过去写的一些零碎东西。
       </p>
 
       <h2>这里会写什么</h2>
@@ -28,13 +37,11 @@ import { SITE_AUTHOR } from '../consts';
         <li>静态站点：<a href="https://astro.build">Astro 5</a></li>
         <li>写作：Markdown / MDX（Content Collections）</li>
         <li>部署：GitHub Pages via GitHub Actions</li>
-        <li>源文件：<a href="https://github.com/ok-jose/jose.github.io">ok-jose/jose.github.io</a></li>
+        <li>源文件：<a href="https://github.com/ok-jose/ok-jose.github.io">ok-jose/ok-jose.github.io</a></li>
       </ul>
 
-      <h2>订阅</h2>
-      <p>
-        欢迎通过 <a href="/rss.xml">RSS</a> 订阅更新。
-      </p>
+      <h2>联系</h2>
+      <SocialLinks links={SOCIAL_LINKS} />
     </article>
   </section>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import BackToTop from '../components/BackToTop.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 interface Props {
@@ -86,6 +87,8 @@ const isActive = (href: string) =>
     <main>
       <slot />
     </main>
+
+    <BackToTop />
 
     <footer class="site-footer">
       <div class="container">
