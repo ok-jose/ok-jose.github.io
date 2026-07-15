@@ -1,10 +1,10 @@
-export const SITE_TITLE = "Jose's Blog";
+export const SITE_TITLE = "Jose's Site";
 export const SITE_DESCRIPTION =
-  '写代码、读书、折腾各种东西。偶尔写点东西记录下来。';
+  '写代码、读书、折腾各种东西。这里有我的博客、工作经历和一些杂七杂八。';
 export const SITE_AUTHOR = 'Jose';
 export const SITE_URL = 'https://ok-jose.github.io';
 
-// "现在在做什么" 状态条 —— 改这里就行
+// "现在在做什么" 状态条
 export const CURRENT_STATUS = {
   emoji: '🔨',
   label: '现在在写',

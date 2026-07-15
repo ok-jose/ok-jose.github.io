@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { workExperience, formatDateRange, durationText } from '../data/work';
+
+// 按开始时间倒序（最新在前），当前岗位（endDate=null）始终在最前
+const sorted = [...workExperience].sort((a, b) => {
+  if (a.endDate === null && b.endDate !== null) return -1;
+  if (a.endDate !== null && b.endDate === null) return 1;
+  return b.startDate.localeCompare(a.startDate);
+});
+
+const totalYears = sorted.reduce((sum, w) => {
+  const [sy, sm] = w.startDate.split('-').map(Number);
+  const [ey, em] = (w.endDate ?? `${new Date().getFullYear()}-${new Date().getMonth() + 1}`).split('-').map(Number);
+  return sum + (ey - sy) * 12 + (em - sm);
+}, 0) / 12;
+const totalYearsText = totalYears >= 1 ? `${Math.floor(totalYears)} 年多` : `${Math.round(totalYears * 12)} 个月`;
+
+const currentRole = sorted.find((w) => w.endDate === null);
+---
+
+<BaseLayout title="工作" description="我的工作经历">
+  <section class="container">
+    <header class="page-header">
+      <h1 class="page-header__title">工作经历</h1>
+      <p class="page-header__sub">
+        {sorted.length} 段工作经历 · 累计 {totalYearsText}
+        {currentRole && (
+          <>
+            {' · 现在在 '}
+            <strong>{currentRole.company}</strong> 做 {currentRole.role}
+          </>
+        )}
+      </p>
+    </header>
+
+    <ol class="timeline" role="list">
+      {sorted.map((work) => (
+        <li class="timeline__entry" id={work.id}>
+          <div class="timeline__marker" aria-hidden="true">
+            <span class:list={['timeline__dot', work.endDate === null && 'timeline__dot--current']}></span>
+          </div>
+
+          <article class="timeline__card">
+            <header class="timeline__head">
+              <div class="timeline__period">
+                <time>{formatDateRange(work.startDate, work.endDate)}</time>
+                <span class="timeline__duration">· {durationText(work.startDate, work.endDate)}</span>
+              </div>
+              {
+                work.endDate === null && (
+                  <span class="badge badge--current">至今</span>
+                )
+              }
+            </header>
+
+            <h2 class="timeline__role">
+              {work.role}
+              <span class="timeline__at"> @ </span>
+              {work.link ? (
+                <a class="timeline__company" href={work.link} target="_blank" rel="noopener noreferrer">
+                  {work.company}
+                </a>
+              ) : (
+                <span class="timeline__company">{work.company}</span>
+              )}
+            </h2>
+
+            {work.location && (
+              <div class="timeline__location">📍 {work.location}</div>
+            )}
+
+            <p class="timeline__desc">{work.description}</p>
+
+            {
+              work.highlights && work.highlights.length > 0 && (
+                <ul class="timeline__highlights">
+                  {work.highlights.map((h) => (
+                    <li>{h}</li>
+                  ))}
+                </ul>
+              )
+            }
+
+            {work.tech.length > 0 && (
+              <div class="timeline__tech">
+                {work.tech.map((t) => <span class="tag">{t}</span>)}
+              </div>
+            )}
+          </article>
+        </li>
+      ))}
+    </ol>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding: 2.5rem 0 1.5rem;
+  }
+  .page-header__title {
+    margin: 0 0 0.5rem;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .page-header__sub {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-size: 1rem;
+  }
+  .page-header__sub strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+
+  /* Timeline */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 4rem;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--color-border);
+    border-radius: 1px;
+  }
+
+  .timeline__entry {
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 2rem;
+  }
+  .timeline__entry:last-child { margin-bottom: 0; }
+
+  .timeline__marker {
+    position: absolute;
+    left: 0;
+    top: 0.3rem;
+  }
+
+  .timeline__dot {
+    display: block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border-strong);
+    box-shadow: 0 0 0 4px var(--color-bg);
+  }
+
+  .timeline__dot--current {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 6px var(--color-accent-soft);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 6px var(--color-accent-soft); }
+    50% { box-shadow: 0 0 0 4px var(--color-bg), 0 0 0 10px transparent; }
+  }
+
+  .timeline__card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    transition: all var(--transition);
+  }
+  .timeline__card:hover {
+    border-color: var(--color-border-strong);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+
+  .timeline__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline__period {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-fg-muted);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  .timeline__duration {
+    color: var(--color-fg-subtle);
+    font-weight: 400;
+  }
+
+  .timeline__role {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+  }
+  .timeline__at { color: var(--color-fg-muted); font-weight: 400; }
+  .timeline__company {
+    color: var(--color-fg);
+  }
+  a.timeline__company {
+    color: var(--color-accent);
+  }
+  a.timeline__company:hover {
+    text-decoration: underline;
+  }
+
+  .timeline__location {
+    color: var(--color-fg-muted);
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .timeline__desc {
+    margin: 0 0 0.75rem;
+    color: var(--color-fg);
+    line-height: 1.7;
+  }
+
+  .timeline__highlights {
+    margin: 0.5rem 0 0.75rem;
+    padding-left: 1.4em;
+    color: var(--color-fg-muted);
+  }
+  .timeline__highlights li {
+    margin: 0.3em 0;
+    line-height: 1.6;
+  }
+
+  .timeline__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.15em 0.6em;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .badge--current {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 540px) {
+    .timeline::before { left: 4px; }
+    .timeline__entry { padding-left: 1.75rem; }
+    .timeline__dot { width: 12px; height: 12px; }
+    .timeline__card { padding: 1rem 1.1rem; }
+  }
+</style>
