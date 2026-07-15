@@ -751,3 +751,35 @@ hr {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* ============================================================
+   View Transitions (Astro 5)
+   ============================================================ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 让导航栏和 footer 跨页面保持 */
+.site-header { view-transition-name: site-header; }
+.site-footer { view-transition-name: site-footer; }
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation-duration: 200ms;
+}
+
+/* 文章页让 h1 渐变 */
+.prose h1,
+.article-header h1 {
+  view-transition-name: article-title;
+}
+
+::view-transition-old(article-title),
+::view-transition-new(article-title) {
+  animation-duration: 300ms;
+}

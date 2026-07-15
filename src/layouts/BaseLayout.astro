@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import BackToTop from '../components/BackToTop.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
@@ -56,6 +57,7 @@ const isActive = (href: string) =>
     <meta property="og:image" content={new URL(image, Astro.site).toString()} />
 
     <title>{pageTitle}</title>
+    <ClientRouter />
   </head>
   <body>
     {showProgress && <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>}
@@ -88,7 +90,7 @@ const isActive = (href: string) =>
       <slot />
     </main>
 
-    <BackToTop />
+    <BackToTop transition:persist />
 
     <footer class="site-footer">
       <div class="container">
