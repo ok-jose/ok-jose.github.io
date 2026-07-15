@@ -36,3 +36,6 @@ index.html
 .idea/
 .vscode/
 .DS_Store
+
+# Yuque 迁移缓存（不进 git）
+.yuque-cache/
