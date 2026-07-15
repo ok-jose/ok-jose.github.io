@@ -22,15 +22,16 @@ pnpm-debug.log*
 .DS_Store
 
 # legacy 2017 hexo static output (保留在本地参考，不进 git)
-2017/
-archives/
-tags/
-uploads/
-lib/
-css/
-images/
-js/
-index.html
+# 用绝对路径避免误伤 public/uploads/yuque/
+/2017/
+/archives/
+/tags/
+/uploads/
+/lib/
+/css/
+/images/
+/js/
+/index.html
 
 # IDE
 .idea/
