@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/duplicate-index-html.mjs",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "astro": "ASTRO_TELEMETRY_DISABLED=1 astro",
     "telemetry:enable": "astro telemetry enable",
