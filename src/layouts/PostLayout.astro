@@ -40,7 +40,7 @@ const readingTime = Math.max(1, Math.round(words / 350));
         tags.length > 0 && (
           <div class="article-tags">
             {tags.map((t) => (
-              <a class="tag" href={`/tags/${t}/`}>
+              <a class="tag" href={`/tags/${t}`}>
                 #{t}
               </a>
             ))}

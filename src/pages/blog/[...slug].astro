@@ -32,7 +32,7 @@ const { Content } = await render(entry);
 <div class="prose-container post-nav-row">
   {
     prev ? (
-      <a class="post-nav post-nav--prev" href={`/blog/${prev.id}/`}>
+      <a class="post-nav post-nav--prev" href={`/blog/${prev.id}`}>
         <span class="post-nav__label">← 上一篇</span>
         <span class="post-nav__title">{prev.data.title}</span>
       </a>
@@ -42,7 +42,7 @@ const { Content } = await render(entry);
   }
   {
     next ? (
-      <a class="post-nav post-nav--next" href={`/blog/${next.id}/`}>
+      <a class="post-nav post-nav--next" href={`/blog/${next.id}`}>
         <span class="post-nav__label">下一篇 →</span>
         <span class="post-nav__title">{next.data.title}</span>
       </a>
