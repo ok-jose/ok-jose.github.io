@@ -6,12 +6,14 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  showProgress?: boolean;
 }
 
 const {
   title,
   description = SITE_DESCRIPTION,
-  image = '/favicon.svg',
+  image = '/avatar.jpg',
+  showProgress = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE;
@@ -38,6 +40,14 @@ const isActive = (href: string) =>
       href={new URL('rss.xml', Astro.site).toString()}
     />
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
@@ -47,9 +57,14 @@ const isActive = (href: string) =>
     <title>{pageTitle}</title>
   </head>
   <body>
+    {showProgress && <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>}
+
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="site-header__brand" href="/">{SITE_TITLE}</a>
+        <a class="site-header__brand" href="/">
+          <span class="site-header__brand-mark">J</span>
+          <span class="site-header__brand-text">{SITE_TITLE}</span>
+        </a>
         <nav class="site-nav" aria-label="主导航">
           <a href="/" class:list={[isActive('/') && 'is-active']}>首页</a>
           <a
@@ -79,5 +94,55 @@ const isActive = (href: string) =>
         Powered by <a href="https://astro.build">Astro</a>
       </div>
     </footer>
+
+    {showProgress && (
+      <script is:inline>
+        // Reading progress bar
+        (function () {
+          const bar = document.getElementById('reading-progress');
+          if (!bar) return;
+          const update = () => {
+            const h = document.documentElement;
+            const scrolled = h.scrollTop || document.body.scrollTop;
+            const max = (h.scrollHeight - h.clientHeight) || 1;
+            const pct = Math.min(100, (scrolled / max) * 100);
+            bar.style.width = pct + '%';
+          };
+          window.addEventListener('scroll', update, { passive: true });
+          window.addEventListener('resize', update);
+          update();
+        })();
+      </script>
+    )}
+
+    <!-- Code copy button -->
+    <script is:inline>
+      (function () {
+        document.querySelectorAll('.prose pre').forEach((pre) => {
+          if (pre.querySelector('.copy-btn')) return;
+          const btn = document.createElement('button');
+          btn.className = 'copy-btn';
+          btn.type = 'button';
+          btn.textContent = 'Copy';
+          btn.setAttribute('aria-label', '复制代码');
+          btn.addEventListener('click', async () => {
+            const code = pre.querySelector('code');
+            const text = code ? code.innerText : pre.innerText;
+            try {
+              await navigator.clipboard.writeText(text);
+              btn.textContent = '已复制';
+              btn.classList.add('is-success');
+              setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('is-success');
+              }, 1500);
+            } catch (e) {
+              btn.textContent = '失败';
+            }
+          });
+          pre.appendChild(btn);
+        });
+      })();
+    </script>
   </body>
 </html>

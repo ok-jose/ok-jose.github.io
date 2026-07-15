@@ -9,10 +9,11 @@ interface Props {
 
 const { entry } = Astro.props;
 const { title, description, pubDate, updatedDate, tags } = entry.data;
-const readingTime = Math.max(1, Math.round((entry.body?.split(/\s+/).length ?? 0) / 350));
+const words = (entry.body ?? '').replace(/```[\s\S]*?```/g, '').length;
+const readingTime = Math.max(1, Math.round(words / 350));
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} showProgress={true}>
   <article class="prose-container">
     <header class="article-header">
       <h1>{title}</h1>
@@ -21,7 +22,9 @@ const readingTime = Math.max(1, Math.round((entry.body?.split(/\s+/).length ?? 0
           <FormattedDate date={pubDate} />
         </time>
         <span>·</span>
-        <span>约 {readingTime} 分钟阅读</span>
+        <span>约 {readingTime} 分钟</span>
+        <span>·</span>
+        <span>{words} 字</span>
         {
           updatedDate && (
             <>

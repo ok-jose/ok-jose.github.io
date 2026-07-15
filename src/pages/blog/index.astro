@@ -38,20 +38,22 @@ const years = Object.keys(groupedByYear)
             <ul class="post-list">
               {groupedByYear[year].map((post) => (
                 <li class="post-card">
-                  <h3 class="post-card__title">
-                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-                  </h3>
-                  <div class="post-card__meta">
-                    <FormattedDate date={post.data.pubDate} />
-                    {post.data.tags.slice(0, 3).map((t) => (
-                      <a class="tag" href={`/tags/${t}/`}>
-                        #{t}
-                      </a>
-                    ))}
+                  <div class="post-card__main">
+                    <h3 class="post-card__title">
+                      <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                    </h3>
+                    <div class="post-card__meta">
+                      <FormattedDate date={post.data.pubDate} />
+                      {post.data.tags.slice(0, 3).map((t) => (
+                        <a class="tag" href={`/tags/${t}/`}>
+                          #{t}
+                        </a>
+                      ))}
+                    </div>
+                    {post.data.description && (
+                      <p class="post-card__desc">{post.data.description}</p>
+                    )}
                   </div>
-                  {post.data.description && (
-                    <p class="post-card__desc">{post.data.description}</p>
-                  )}
                 </li>
               ))}
             </ul>

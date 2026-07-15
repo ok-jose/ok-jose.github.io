@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION, CURRENT_STATUS, SOCIAL_LINKS } from '../c
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-  .slice(0, 5);
+  .slice(0, 6);
 ---
 
 <BaseLayout title={undefined} description={SITE_DESCRIPTION}>
@@ -49,20 +49,25 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
         <ul class="post-list">
           {posts.map((post) => (
             <li class="post-card">
-              <h3 class="post-card__title">
-                <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-              </h3>
-              <div class="post-card__meta">
-                <FormattedDate date={post.data.pubDate} />
-                {post.data.tags.slice(0, 3).map((t) => (
-                  <a class="tag" href={`/tags/${t}/`}>
-                    #{t}
-                  </a>
-                ))}
+              <div class="post-card__main">
+                <h3 class="post-card__title">
+                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                </h3>
+                <div class="post-card__meta">
+                  <FormattedDate date={post.data.pubDate} />
+                  {post.data.tags.slice(0, 3).map((t) => (
+                    <a class="tag" href={`/tags/${t}/`}>
+                      #{t}
+                    </a>
+                  ))}
+                </div>
+                {post.data.description && (
+                  <p class="post-card__desc">{post.data.description}</p>
+                )}
               </div>
-              {post.data.description && (
-                <p class="post-card__desc">{post.data.description}</p>
-              )}
+              <div class="post-card__date-col">
+                <div class="year">{post.data.pubDate.getFullYear()}</div>
+              </div>
             </li>
           ))}
         </ul>

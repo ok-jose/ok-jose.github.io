@@ -31,3 +31,8 @@ css/
 images/
 js/
 index.html
+
+# IDE
+.idea/
+.vscode/
+.DS_Store
