@@ -26,8 +26,8 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  --max-w-prose: 720px;
-  --max-w-page: 768px;
+  --max-w-prose: clamp(720px, 88vw, 860px);
+  --max-w-page: clamp(768px, 92vw, 960px);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
