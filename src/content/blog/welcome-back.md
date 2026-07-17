@@ -1,35 +1,26 @@
 ---
-title: 'Hello Again —— 博客重建记'
-description: '9 年后，用 Astro 重建这个博客。'
+title: 'Hello Again —— 2332 与 3223'
+description: '9年后，从23岁来到32岁。'
 pubDate: 2026-07-14
-tags: ['meta', 'astro']
+tags: ['meta', 'essay']
+heroImage: '/uploads/welcome-back/terminus.jpg'
 ---
 
-这是一篇重启博客的宣言。
+9年后，从23岁来到32岁
 
-## 为什么重启
+![端点离职纪念卡：感谢在杭州端点网络科技有限公司工作的 3223 天（2017.06.12 – 2026.04.09）](/uploads/welcome-back/terminus.png)
 
-上次更新是 2017 年 6 月 26 日。9 年过去，Hexo 还在，
-Next 主题却早已不再维护，部署流程也早已忘记。
+## 重新出发
 
-## 为什么选 Astro
-
-- **内容优先**：默认零 JS，文章页就是纯 HTML。
-- **现代 DX**：TypeScript、Content Collections、Vite 一切都是现成的。
-- **部署简单**：`astro build` 完事，丢给 GitHub Actions 自动发布。
+上一份工作从 23岁做到 32岁，一共做了 3223天，冥冥之中的天意。
 
 ## 接下来
 
-- 把 2017 年的旧文迁移过来
-- 重新写点东西
-- 找个干净的主题配色
+- 再也回不到 23 岁了
+- 等待 3443
+- 等待 4554
+- ～
 
 > Done is better than perfect.
-
-```ts
-// 顺便贴个 Astro 5 渲染文章的小细节
-import { render } from 'astro:content';
-const { Content } = await render(entry);
-```
 
 欢迎订阅 [RSS](/rss.xml) 或在 [关于页](/about) 找到更多联系方式。

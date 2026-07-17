@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+const tagCounts = posts.reduce(
+  (acc, post) => {
+    for (const tag of post.data.tags) {
+      acc[tag] = (acc[tag] ?? 0) + 1;
+    }
+    return acc;
+  },
+  {} as Record<string, number>,
+);
+
+const tags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+---
+
+<BaseLayout title="标签" description="按标签浏览文章">
+  <section class="container">
+    <header class="hero" style="padding-top: 2.5rem; padding-bottom: 1rem;">
+      <h1 class="hero__title">标签</h1>
+      <p class="hero__tagline">
+        共 {tags.length} 个标签，覆盖 {posts.length} 篇文章。
+      </p>
+    </header>
+
+    {
+      tags.length === 0 ? (
+        <p class="empty-state">还没有任何标签。</p>
+      ) : (
+        <div class="tag-cloud">
+          {tags.map(([tag, count]) => (
+            <a class="tag" href={`/tags/${tag}`}>
+              #{tag} <span style="opacity: 0.7;">· {count}</span>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>
