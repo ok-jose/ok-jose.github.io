@@ -8,7 +8,7 @@ heroImage: '/uploads/welcome-back/terminus.jpg'
 
 9年后，从23岁来到32岁
 
-![端点离职纪念卡：感谢在杭州端点网络科技有限公司工作的 3223 天（2017.06.12 – 2026.04.09）](/uploads/welcome-back/terminus.png)
+![端点离职纪念卡：感谢在杭州端点网络科技有限公司工作的 3223 天（2017.06.12 – 2026.04.09）](/uploads/welcome-back/terminus.jpg)
 
 ## 重新出发
 
